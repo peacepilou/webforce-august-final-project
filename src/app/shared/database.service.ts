@@ -8,7 +8,14 @@ import { Comment } from '../models/comment';
 })
 export class DatabaseService {
 
-  constructor(private firestore: AngularFirestore) { }
+  coms: Comment[] = []
+
+  constructor(private firestore: AngularFirestore) {
+    this.getAllComments().valueChanges().subscribe(dataFormDB => {
+      this.coms = dataFormDB;
+      console.log(this.coms);  
+    })
+   }
 
   getAllComments(): AngularFirestoreCollection<Comment> {
     return this.firestore.collection('comments');
@@ -19,5 +26,8 @@ export class DatabaseService {
     this.firestore.collection('comments').add({...comment});
   }
 
+  getCommentById(id: number): Comment {
+    return this.coms.find(comment => comment.id === id);
+  }
 
 }

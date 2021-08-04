@@ -10,7 +10,7 @@ import { DatabaseService } from '../shared/database.service';
 export class CommentFormComponent implements OnInit {
 
   categories: string[] = ['cours', 'ressenti', 'travail maison', 'évaluation'];
-  com: Comment = new Comment('', 0, '', '');
+  com: Comment = new Comment('', 0, '', '', 0);
   commentList: Comment[] = [];
 
   constructor(private service: DatabaseService) { }
@@ -22,7 +22,6 @@ export class CommentFormComponent implements OnInit {
   }
 
   getColor(com: Comment): string{
-    console.log('b le');
     
     if(com.score <1 && com.score == 0)
     {

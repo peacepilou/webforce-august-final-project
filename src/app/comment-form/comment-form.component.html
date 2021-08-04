@@ -44,7 +44,7 @@
 <hr>
 
 <section id="allcoms">
-    <div *ngFor="let com of commentList" [ngStyle]="{'border-color': getColor(com) } ">
+    <div *ngFor="let com of commentList" [ngStyle]="{'border-color': getColor(com)}" [routerLink]="['/comments/comment/', com.id]">
 
         <h3>{{com.pseudo}} <span> ({{com.category}})</span> <strong>{{com.score}}</strong></h3>
         <p>{{com.comment}}</p>
