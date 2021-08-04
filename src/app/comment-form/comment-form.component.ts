@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Comment } from '../models/comment';
+import { DatabaseService } from '../shared/database.service';
 
 @Component({
   selector: 'app-comment-form',
@@ -9,17 +10,20 @@ import { Comment } from '../models/comment';
 export class CommentFormComponent implements OnInit {
 
   categories: string[] = ['cours', 'ressenti', 'travail maison', 'évaluation'];
-  comment: Comment = new Comment('', 0, '', '');
+  com: Comment = new Comment('', 0, '', '');
   commentList: Comment[] = [];
 
-  constructor() { }
+  constructor(private service: DatabaseService) { }
 
   ngOnInit(): void {
+    this.service.getAllComments().valueChanges().subscribe(dataFromDB=> {
+      this.commentList = dataFromDB;
+    })
   }
 
   onSubmit(): void{
-    console.log(this.comment);
-    this.commentList.push(this.comment);
+    console.log(this.com);
+    this.service.createComment(this.com);
     console.log(this.commentList);
 
   }
