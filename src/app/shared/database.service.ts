@@ -15,8 +15,8 @@ export class DatabaseService {
   }
 
   createComment(comment: Comment): void {
-    console.log( this.firestore.collection('comments'));
-    this.firestore.collection('comments').add(comment);
+    console.log(comment);
+    this.firestore.collection('comments').add({...comment});
   }
 
 

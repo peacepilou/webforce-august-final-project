@@ -21,6 +21,20 @@ export class CommentFormComponent implements OnInit {
     })
   }
 
+  getColor(com: Comment): string{
+    console.log('b le');
+    
+    if(com.score <1 && com.score == 0)
+    {
+      return 'red';
+    }else if(com.score >=1 && com.score < 3){
+      return 'orange';
+    }else{
+      return 'green';
+    }
+
+  }
+
   onSubmit(): void{
     console.log(this.com);
     this.service.createComment(this.com);

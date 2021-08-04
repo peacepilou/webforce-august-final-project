@@ -1,4 +1,4 @@
-<section>
+<section id="s">
     <form #myForm="ngForm" (ngSubmit)="onSubmit()">
         <div>
             <label for="category-comment">Categorie</label>
@@ -8,29 +8,28 @@
                 </option>
             </select>
         </div>
-        <div *ngIf="category.errors">
+        <div *ngIf="category.errors && myForm.submitted">
             <span *ngIf="category.errors?.required">Le champs est requis </span>
         </div>
         <div>
             <label for="pseudo-comment">Pseudo</label>
-            <input name="pseudo-comment" id="pseudo-comment" type="text" #pseudo="ngModel" [(ngModel)]="com.pseudo" required minlength="5">
+            <input name="pseudo-comment" id="pseudo-comment" type="text" #pseudo="ngModel" [(ngModel)]="com.pseudo" required>
         </div>
-        <div *ngIf="pseudo.errors">
+        <div *ngIf="pseudo.errors && myForm.submitted">
             <span *ngIf="pseudo.errors?.required">Le titre est requis</span>
-            <span *ngIf="pseudo.errors?.minlength">La longueur minimale doit être supérieur à 5 caractères</span>
         </div>
         <div>
             <label for="score-comment">Note</label>
-            <input name="score-comment" id="score-comment" type="number" #score="ngModel" [(ngModel)]="com.score" required>
+            <input name="score-comment" id="score-comment" type="number" #score="ngModel" [(ngModel)]="com.score" required max=5 min=0>
         </div>
-        <div *ngIf="score.errors">
+        <div *ngIf="score.errors && myForm.submitted">
             <span *ngIf="score.errors?.required">Le champs est requis </span>
         </div>
         <div>
             <label for="comment-comment">Commentaire</label>
-            <input name="comment-comment" id="comment-comment" type="text" #comment="ngModel" [(ngModel)]="com.comment" required>
+            <textarea name="comment-comment" id="comment-comment" type="text" #comment="ngModel" [(ngModel)]="com.comment" required rows=6 cols=40></textarea>
         </div>
-        <div *ngIf="comment.errors">
+        <div *ngIf="comment.errors && myForm.submitted">
             <span *ngIf="comment.errors?.required">Le champs est requis </span>
         </div>
 
@@ -42,9 +41,13 @@
     </form>
 </section>
 
-<section *ngFor="let coms of commentList" id="allcoms">
-    <h3>{{coms.pseudo}} <span> {{coms.category}}</span></h3>
-    <strong>{{coms.score}}</strong>
-    <p>{{coms.comment}}</p>
+<hr>
+
+<section id="allcoms">
+    <div *ngFor="let com of commentList" [ngStyle]="{'border-color': getColor(com) } ">
+
+        <h3>{{com.pseudo}} <span> ({{com.category}})</span> <strong>{{com.score}}</strong></h3>
+        <p>{{com.comment}}</p>
+    </div>
 
 </section>

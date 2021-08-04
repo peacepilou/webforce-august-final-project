@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { CommentPageComponent } from './comment-page/comment-page.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
 import { FormsModule } from '@angular/forms';
+import { PictoComponent } from './picto/picto.component';
+import { OneCommentComponent } from './one-comment/one-comment.component';
 
 
 
@@ -24,6 +26,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     CommentPageComponent,
     CommentFormComponent,
+    PictoComponent,
+    OneCommentComponent,
    
   ],
   imports: [
